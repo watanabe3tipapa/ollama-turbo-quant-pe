@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ollama Turbo Quant</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        line-height: 1.7;
+        color: #333;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #1a1a1a;
+      }
+      h2 {
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e0e0e0;
+        color: #1a1a1a;
+      }
+      h3 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.5rem;
+        color: #333;
+      }
+      p {
+        margin: 1rem 0;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      th {
+        background: #f5f5f5;
+        font-weight: 600;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Monaco", "Menlo", monospace;
+        font-size: 0.9em;
+      }
+      pre {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 16px;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+      pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+      }
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem 2rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+      }
+      .hero h1 {
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+      .hero p {
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+      ul,
+      ol {
+        margin: 1rem 0 1rem 1.5rem;
+      }
+      li {
+        margin: 0.5rem 0;
+      }
+      .mode-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+      .mode-card {
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .mode-card h3 {
+        margin-top: 0;
+      }
+      .feature-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+      }
+      .feature-item {
+        padding: 0.75rem 1rem;
+        background: #f9f9f9;
+        border-radius: 6px;
+      }
+      .feature-item strong {
+        color: #667eea;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Ollama Turbo Quant</h1>
+      <p>
+        Ollama Turbo
+        Quantは、turbo-quantが提供するベクトル量子化機能（符号化、デコード等）を使って、Ollamaからの出力を後処理できるローカルLLM支援ツールです。
+      </p>
+    </div>
+
+    <h2>概要</h2>
+    <p>
+      Ollama Turbo
+      Quantは、ローカルLLM（Ollama）との対話を支援するWebツールです。turbo-quantライブラリのベクトル量子化機能を活用し、LLMレスポンスの変換・圧縮・品質改善を実現します。
+    </p>
+
+    <img
+      src="IMG_ollama-turbo-quant-pe.jpg"
+      alt="Ollama Turbo Quant"
+      style="max-width: 100%; border-radius: 8px; margin: 1rem 0"
+    />
+
+    <h2>2つのモード</h2>
+    <div class="mode-grid">
+      <div class="mode-card">
+        <h3>non-Turbo</h3>
+        <p><strong>ポート: 3000</strong></p>
+        <p>Ollamaとの連携のみ</p>
+      </div>
+      <div class="mode-card">
+        <h3>Turbo</h3>
+        <p><strong>ポート: 3001</strong></p>
+        <p>Ollama + Turbo-Quantによるレスポンス処理</p>
+      </div>
+    </div>
+
+    <h2>主な機能</h2>
+    <div class="feature-list">
+      <div class="feature-item">
+        <strong>Prompt編集:</strong> Monaco Editorによる高度なテキスト編集
+      </div>
+      <div class="feature-item">
+        <strong>ストリーミング生成:</strong>
+        WebSocket経由でのリアルタイムLLM出力
+      </div>
+      <div class="feature-item">
+        <strong>モデル選択:</strong>
+        Ollamaに登録されているモデルの一覧表示・選択
+      </div>
+      <div class="feature-item">
+        <strong>レスポンス編集:</strong> 生成後の編集・適用機能
+      </div>
+      <div class="feature-item">
+        <strong>ファイル保存:</strong> レスポンスのMarkdownファイル出力
+      </div>
+      <div class="feature-item">
+        <strong>Turbo-Quant処理:</strong>
+        レスポンスのベクトル量子化による変換（Turboモード）
+      </div>
+    </div>
+
+    <h2>技術スタック</h2>
+
+    <h3>Frontend</h3>
+    <ul>
+      <li>React 18</li>
+      <li>TypeScript 5</li>
+      <li>Vite 5</li>
+      <li>Monaco Editor</li>
+    </ul>
+
+    <h3>Backend</h3>
+    <ul>
+      <li>Rust</li>
+      <li>Axum 0.7</li>
+      <li>Tokio</li>
+    </ul>
+
+    <h3>Turbo-Quant</h3>
+    <ul>
+      <li>
+        <a href="https://github.com/RecursiveIntell/turbo-quant" target="_blank"
+          >turbo-quant</a
+        >
+      </li>
+      <li>nalgebra</li>
+      <li>rand</li>
+    </ul>
+
+    <h2>クイックスタート</h2>
+
+    <h3>前提条件</h3>
+    <ul>
+      <li>Rust 1.75+</li>
+      <li>Node.js 18+</li>
+      <li>Ollama（localhost:11434で起動済み）</li>
+    </ul>
+
+    <h3>起動</h3>
+    <pre><code># non-Turbo起動（http://localhost:3000）
+./ready.sh
+
+# Turbo起動（http://localhost:3001）
+./ready.sh turbo</code></pre>
+
+    <h2>詳細ドキュメント</h2>
+    <p>詳細な使い方は <a href="USAGE.md">USAGE.md</a> を参照してください。</p>
+
+    <h2>ライセンス</h2>
+    <p>MIT</p>
+
+    <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px;">
+      <a href="https://github.com/watanabe3tipapa/ollama-turbo-quant-pe" target="_blank" style="display: inline-block; padding: 14px 32px; background: white; color: #333; font-weight: 600; font-size: 1.1rem; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s, box-shadow 0.2s;">
+        リポジトリを見る →
+      </a>
+      <p style="color: rgba(255,255,255,0.8); margin-top: 1rem; font-size: 0.9rem;">watanabe3tipapa/ollama-turbo-quant-pe</p>
+    </div>
+  </body>
+</html>

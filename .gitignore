@@ -1,0 +1,46 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Rust
+target/
+Cargo.lock
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+.vscode/
+.settings/
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.tgz
+
+# Backend logs
+backend.log
+frontend.log
+backend-turbo.log
+frontend-turbo.log
+
+# Vite
+vite.config.ts.timestamp-*
